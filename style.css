@@ -1,0 +1,329 @@
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .sidebar {
+        display: none;
+    }
+
+    .main-section, .icons, .about, footer {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .icons-section {
+        flex-wrap: wrap;
+    }
+
+    .about-section {
+        flex-direction: column;
+    }
+
+    .about img,
+    .about-content {
+        width: 100%;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* ===== BODY ===== */
+body {
+    background: #f7f7f7;
+    min-height: 100vh;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+    width: 260px;
+    height: 100vh;
+    background: #eeeeee;
+    padding: 20px;
+    position: fixed;
+    z-index: 10;
+}
+
+/* LOGO */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.logo img {
+    width: 45px;
+    height: 45px;
+}
+
+.logo-text {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* TITLE */
+.sidebar-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+/* NAV */
+.sidebar a {
+    display: block;
+    margin: 15px 0;
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.sidebar a:hover {
+    color: green;
+}
+
+/* ===== SECTIONS ===== */
+.section {
+    scroll-snap-align: start;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+
+    /* Flow: slide-in on scroll */
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.8s ease;
+}
+
+.section.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Flow: wave at the bottom of every section */
+.section::before {
+    content: '';
+    position: absolute;
+    bottom: -60px;
+    left: -10%;
+    width: 120%;
+    height: 120px;
+    background: rgba(47, 93, 47, 0.08);
+    border-radius: 50%;
+    animation: wave 5s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Flow: wave at the top of every section */
+.section::after {
+    content: '';
+    position: absolute;
+    top: -60px;
+    left: -10%;
+    width: 120%;
+    height: 120px;
+    background: rgba(47, 93, 47, 0.05);
+    border-radius: 50%;
+    animation: wave 6s ease-in-out infinite alternate-reverse;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes wave {
+    0%   { transform: translateX(0) scaleY(1); }
+    100% { transform: translateX(4%) scaleY(1.15); }
+
+}
+
+/* Flow: floating particles (add .particle divs inside each section in HTML) */
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    background: #2f5d2f;
+    opacity: 0.12;
+    animation: floatUp linear infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes floatUp {
+    93%   { transform: translateY(100%) translateX(0); }
+    100% { transform: translateY(-120%) translateX(20px); }
+}
+
+/* ===== MAIN (First Section) ===== */
+.main-section {
+    margin-left: 260px;
+    width: calc(100% - 260px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f7f7f7;
+}
+
+/* ===== HERO (VIDEO) ===== */
+.hero {
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.hero video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* overlay text */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.3);
+    z-index: 1;
+}
+
+.hero-overlay h1 {
+    font-size: 48px;
+    font-weight: 800;
+    color: black;
+}
+
+.hero-overlay p {
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+/* ===== ICON SECTION (Second Section) ===== */
+.icons-section {
+    margin-left: 260px;
+    width: calc(100% -260px) ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    padding: 50px 20px;
+    background: #f7f7f7;
+    min-height: 50vh;
+}
+
+.icon-box {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.icon-circle {
+    width: 130px;
+    height: 130px;
+    background: #f3eebc;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    /* Flow: gentle pulse */
+    animation: pulse 3s ease-in-out infinite;
+}
+
+.icon-circle:nth-child(2) { animation-delay: 0.4s; }
+.icon-circle:nth-child(3) { animation-delay: 0.8s; }
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50%       { transform: scale(1.06); }
+}
+
+.icon-circle img {
+    width: 150px;
+}
+
+.icon-title {
+    font-weight: bold;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+/* ===== ABOUT SECTION (Third Section) ===== */
+.about-section {
+    margin-left: 260px;
+    width: calc(100% - 260px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding: 40px;
+    background: #f7f7f7;
+    min-height: 50vh;
+}
+
+.about img {
+    width: 45%;
+    border-radius: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.about-content {
+    width: 55%;
+    position: relative;
+    z-index: 1;
+}
+
+.about-content h2 {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.about-content p {
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* BUTTON */
+.btn {
+    background: #2f5d2f;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+
+    /* Flow: lift on hover */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(47, 93, 47, 0.3);
+}
+
+/* FOOTER (Fourth Section) */
+footer {
+    margin-left: 260px;
+    width: calc(100% - 260px);
+    background: black;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    height: auto;
+    position: relative;
+    z-index: 1;
+}
